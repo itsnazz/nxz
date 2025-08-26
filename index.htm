@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NXZ Resources</title>
+<style>
+:root{
+  --bg:#0f1720; --card:#0f1729aa; --accent: #7dd3fc; --muted:#9fbcd8;
+  --glass: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.12);
+  --soft-shadow: 0 10px 30px rgba(2,6,23,0.6);
+}
+[data-theme="light"]{
+  --bg:#f6fbff; --card: rgba(255,255,255,0.9); --accent:#2563eb; --muted:#4b5563;
+  --glass: rgba(0,0,0,0.04); --glass-border: rgba(0,0,0,0.08); --soft-shadow: 0 8px 24px rgba(2,6,23,0.06);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--muted);font-family:Inter, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial;}
+a{color:inherit;text-decoration:none}
+.topbar{
+  position:fixed;left:0;right:0;top:0;height:64px;display:flex;align-items:center;gap:12px;padding:0 16px;
+  backdrop-filter: blur(8px); background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+  border-bottom:1px solid var(--glass-border); z-index:40; box-shadow: var(--soft-shadow);
+}
+.brand { display:flex;align-items:center;gap:10px; margin-right:12px; }
+.logo { width:44px;height:44px;border-radius:10px;display:grid;place-items:center; background:linear-gradient(135deg,var(--accent), #9b8cff); color:#032; font-weight:900; font-size:18px; box-shadow:0 6px 20px rgba(100,140,255,0.15);}
+.brand h1{margin:0;font-size:1.05rem;color:var(--muted);letter-spacing:0.6px}
+.tabs{display:flex;gap:8px;align-items:center;margin-left:8px;}
+.tab-btn{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;border:1px solid transparent;background:transparent;color:var(--muted);cursor:pointer;font-weight:600;transition:all .22s;}
+.tab-btn:hover{transform:translateY(-2px); color:var(--accent); box-shadow:0 6px 20px rgba(0,0,0,0.25)}
+.tab-btn.active{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(200,220,255,0.02)); color:white; border-color:var(--glass-border)}
+.top-controls{margin-left:auto;display:flex;gap:8px;align-items:center}
+.control-btn{padding:8px;border-radius:10px;border:1px solid var(--glass-border); background:var(--glass); cursor:pointer;color:var(--muted);display:inline-flex;gap:8px;align-items:center}
+.control-btn:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,0,0,0.25)}
+main{padding:88px 20px 160px;max-width:1200px;margin:0 auto;}
+section{margin-bottom:28px;opacity:0;transform:translateY(8px);transition:opacity .45s ease, transform .45s ease;}
+section.visible{opacity:1;transform:none}
+section h2{margin:0 0 12px;font-size:1.25rem;color:var(--muted);text-align:left}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card); border-radius:14px;padding:14px;border:1px solid var(--glass-border);box-shadow:0 12px 30px rgba(2,6,23,0.45); color:var(--muted);overflow:hidden;position:relative;transition: transform .22s ease, box-shadow .22s ease, border-color .22s;display:flex;flex-direction:column;}
+.card:hover{transform:translateY(-6px); border-color: rgba(125,211,252,0.45); box-shadow:0 16px 36px rgba(2,6,23,0.5)}
+.card .title{font-weight:800;color:var(--accent);margin-bottom:6px;display:flex;align-items:center;gap:8px;font-size:1rem;}
+.card .title img{width:24px;height:24px;object-fit:contain;}
+.card .desc{font-size:0.92rem;color:var(--muted);margin-bottom:8px}
+.card .link-row{display:flex;gap:8px;align-items:center}
+.card .btn{padding:6px 10px;border-radius:8px;background:linear-gradient(90deg, rgba(125,211,252,0.12), rgba(155,140,255,0.06));border:1px solid rgba(125,211,252,0.12);color:#fff;font-weight:700}
+#backToTop{position:fixed;left:20px;bottom:110px;padding:10px;border-radius:10px;background:var(--glass);border:1px solid var(--glass-border);cursor:pointer;z-index:35;display:none}
+#backToTop:hover{transform:translateY(-3px)}
+.floating-shape{position:fixed;z-index:-1;border-radius:50%;opacity:0.12;mix-blend-mode:screen;pointer-events:none;animation:floatAnim 6s ease-in-out infinite alternate;}
+@keyframes floatAnim{0%{transform:translateY(0)}100%{transform:translateY(20px)}}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="topbar">
+  <div class="brand">
+    <div class="logo">NXZ</div>
+    <div><h1>NXZ Resources</h1><div style="font-size:12px;color:var(--muted);margin-top:4px">Curated emulators & tools — For the people</div></div>
+  </div>
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="emulators">🎮 Emulators</button>
+    <button class="tab-btn" data-tab="android">🤖 Android Emulators</button>
+    <button class="tab-btn" data-tab="roms">💾 ROM Sites</button>
+    <button class="tab-btn" data-tab="repacks">📦 Repacks</button>
+    <button class="tab-btn" data-tab="trainers">🛠️ Trainers</button>
+    <button class="tab-btn" data-tab="freebies">🎁 Freebies</button>
+  </nav>
+  <div class="top-controls">
+    <button id="themeToggle" class="control-btn">🌓 Theme</button>
+    <button id="openSfx" class="control-btn">⏯️ Music</button>
+    <input type="range" id="volumeControl" min="0" max="1" step="0.01" style="width:80px; margin-left:4px; display:none;">
+  </div>
+</div>
+
+<main>
+<!-- Emulators -->
+<section id="emulators" class="visible">
+<h2>🎮 Emulators</h2>
+<div class="grid">
+<article class="card"><div class="title">Lime3DS</div><div class="desc">3DS emulator fork / builds & tools.</div><div class="link-row"><a class="btn" href="https://github.com/Lime3DS/Lime3DS" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Suyu</div><div class="desc">Nintendo Switch emulator project / info.</div><div class="link-row"><a class="btn" href="https://suyu.dev/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Eden</div><div class="desc">Nintendo Switch emulator (modern builds).</div><div class="link-row"><a class="btn" href="https://eden.dev/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">PPSSPP</div><div class="desc">PlayStation Portable emulator (official).</div><div class="link-row"><a class="btn" href="https://www.ppsspp.org/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Vita3K</div><div class="desc">PlayStation Vita emulator (open project).</div><div class="link-row"><a class="btn" href="https://vita3k.org/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Xenia</div><div class="desc">Xbox 360 emulator for Windows.</div><div class="link-row"><a class="btn" href="https://xenia.jp/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Dolphin</div><div class="desc">GameCube / Wii emulator.</div><div class="link-row"><a class="btn" href="https://dolphin-emu.org/download/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Winlator</div><div class="desc">Multi-platform emulator.</div><div class="link-row"><a class="btn" href="https://winlator.com/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Cemu</div><div class="desc">Wii U emulator for PC.</div><div class="link-row"><a class="btn" href="http://cemu.info/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Yuzu</div><div class="desc">Nintendo Switch emulator.</div><div class="link-row"><a class="btn" href="https://yuzu-emu.org/" target="_blank">Visit</a></div></article>
+</div>
+</section>
+
+<!-- Android Emulators -->
+<section id="android">
+<h2>🤖 Android Emulators</h2>
+<div class="grid">
+<article class="card"><div class="title">BlueStacks</div><div class="desc">Popular Android emulator for PC & Mac.</div><div class="link-row"><a class="btn" href="https://www.bluestacks.com/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">NoxPlayer</div><div class="desc">Android emulator with extensive compatibility.</div><div class="link-row"><a class="btn" href="https://www.bignox.com/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">MEmu</div><div class="desc">Android emulator optimized for gaming.</div><div class="link-row"><a class="btn" href="https://www.memuplay.com/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">LDPlayer</div><div class="desc">High-performance Android emulator.</div><div class="link-row"><a class="btn" href="https://www.ldplayer.net/" target="_blank">Visit</a></div></article>
+</div>
+</section>
+
+<!-- ROM Sites -->
+<section id="roms">
+<h2>💾 ROM Sites</h2>
+<div class="grid">
+<article class="card"><div class="title">ROMsFun</div><div class="desc">Large ROM collection & emulation resources.</div><div class="link-row"><a class="btn" href="https://romsfun.com/roms" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">RomsGames.net</div><div class="desc">Retro ROMs & downloads.</div><div class="link-row"><a class="btn" href="https://www.romsgames.net/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Archive.org</div><div class="desc">Browser-playable classics.</div><div class="link-row"><a class="btn" href="https://archive.org/details/softwarelibrary_msdos_games" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">EmuParadise</div><div class="desc">Wide variety of retro ROMs.</div><div class="link-row"><a class="btn" href="https://www.emuparadise.me/" target="_blank">Visit</a></div></article>
+</div>
+</section>
+
+<!-- Repacks -->
+<section id="repacks">
+<h2>📦 Game Repacks & Sites</h2>
+<div class="grid">
+<article class="card"><div class="title">FitGirl Repacks</div><div class="desc">Compressed repacks with installers.</div><div class="link-row"><a class="btn" href="https://fitgirl-repacks.site/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">IGG-Games</div><div class="desc">Game downloads & repack listings.</div><div class="link-row"><a class="btn" href="https://igg-games.com/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">SteamUnlocked</div><div class="desc">Alternative game download listings.</div><div class="link-row"><a class="btn" href="https://steamunlocked.net/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Ocean of Games</div><div class="desc">Repack downloads and cracked games.</div><div class="link-row"><a class="btn" href="https://oceanofgames.com/" target="_blank">Visit</a></div></article>
+</div>
+</section>
+
+<!-- Trainers -->
+<section id="trainers">
+<h2>🛠️ Trainers & Cheats</h2>
+<div class="grid">
+<article class="card"><div class="title">FLiNG Trainers</div><div class="desc">Trainer downloads & database.</div><div class="link-row"><a class="btn" href="https://flingtrainer.com/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Cheat Evolution</div><div class="desc">Trainer patches & more.</div><div class="link-row"><a class="btn" href="https://cheatevolution.com/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">MrAntiFun</div><div class="desc">Comprehensive trainer lists.</div><div class="link-row"><a class="btn" href="https://mrantifun.net/threads/list-of-all-trainers.503/" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">GameCopyWorld</div><div class="desc">Old & new trainers database.</div><div class="link-row"><a class="btn" href="https://www.gamecopyworld.com/" target="_blank">Visit</a></div></article>
+</div>
+</section>
+
+<!-- Freebies -->
+<section id="freebies">
+<h2>🎁 Free Games / Giveaways</h2>
+<div class="grid">
+<article class="card"><div class="title">Epic Games Free Games</div><div class="desc">Weekly free games.</div><div class="link-row"><a class="btn" href="https://www.epicgames.com/store/en-US/free-games" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">GOG Free Games</div><div class="desc">Occasional giveaways.</div><div class="link-row"><a class="btn" href="https://www.gog.com/partner/free_games" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Itch.io Free Games</div><div class="desc">Indie free games & demos.</div><div class="link-row"><a class="btn" href="https://itch.io/games/free" target="_blank">Visit</a></div></article>
+<article class="card"><div class="title">Humble Free Games</div><div class="desc">Occasional free giveaways.</div><div class="link-row"><a class="btn" href="https://www.humblebundle.com/free-games" target="_blank">Visit</a></div></article>
+</div>
+</section>
+
+</main>
+<button id="backToTop">⬆ Top</button>
+<footer>
+  <p>NXZ Resources — curated emulators, ROMs, trainers & more.</p>
+  <p>Made with ❤️ by NXZ</p>
+</footer>
+
+<!-- Audio -->
+<audio id="bgMusic" loop>
+  <source src="https://assets.mixkit.co/music/preview/mixkit-lofi-chill-hop-quiet-study-110.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Floating shapes -->
+<div class="floating-shape" style="width:120px;height:120px;background:radial-gradient(circle,#7dd3fc,transparent);top:20%;left:10%;"></div>
+<div class="floating-shape" style="width:180px;height:180px;background:radial-gradient(circle,#9b8cff,transparent);top:50%;left:75%;"></div>
+<div class="floating-shape" style="width:100px;height:100px;background:radial-gradient(circle,#7dd3fc,transparent);top:80%;left:30%;"></div>
+<div class="floating-shape" style="width:150px;height:150px;background:radial-gradient(circle,#9b8cff,transparent);top:10%;left:60%;"></div>
+
+<!-- Cursor trail -->
+<div id="cursorTrail" style="position:fixed;top:0;left:0;width:14px;height:14px;border-radius:50%;pointer-events:none;z-index:100;background:rgba(125,211,252,0.8);transform:translate(-50%,-50%);"></div>
+
+<script>
+// Intersection observer for section fade-in
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add('visible');
+  });
+},{threshold:0.15});
+document.querySelectorAll('section').forEach(sec=>observer.observe(sec));
+
+// Tab navigation
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const sec = document.getElementById(btn.dataset.tab);
+    if(sec) sec.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// Back to top button
+const backBtn = document.getElementById('backToTop');
+window.addEventListener('scroll',()=>{backBtn.style.display=window.scrollY>300?'block':'none';})
+backBtn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// Theme toggle
+document.getElementById('themeToggle').addEventListener('click',()=>{
+  document.body.dataset.theme = document.body.dataset.theme==='dark'?'light':'dark';
+});
+
+// Music play/pause
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('openSfx');
+const volControl = document.getElementById('volumeControl');
+let musicPlaying = false;
+bgMusic.volume = 0.5;
+volControl.value = bgMusic.volume;
+
+// Show volume slider when music is active
+musicBtn.addEventListener('click',()=>{
+  if(!musicPlaying){
+    bgMusic.play().then(()=>{
+      musicPlaying = true; musicBtn.textContent='⏸️ Pause'; volControl.style.display='inline-block';
+    }).catch(()=>alert("Autoplay blocked. Click again."));
+  } else {
+    bgMusic.pause();
+    musicPlaying=false;
+    musicBtn.textContent='⏯️ Music'; volControl.style.display='none';
+  }
+});
+
+// Volume slider
+volControl.addEventListener('input',(e)=>{
+  bgMusic.volume = e.target.value;
+});
+
+// Cursor particle effect
+const cursor = document.getElementById('cursorTrail');
+document.addEventListener('mousemove', e => {
+  cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`;
+  const p = document.createElement('div');
+  p.style.position='fixed';
+  p.style.left=`${e.clientX}px`;
+  p.style.top=`${e.clientY}px`;
+  p.style.width='6px'; p.style.height='6px'; p.style.borderRadius='50%';
+  p.style.background='rgba(125,211,252,0.4)'; p.style.pointerEvents='none';
+  p.style.zIndex=99; p.style.transition='transform 0.3s linear, opacity 0.6s linear';
+  document.body.appendChild(p);
+  requestAnimationFrame(()=>{
+    const offsetX = (Math.random()-0.5)*30;
+    const offsetY = (Math.random()-0.5)*30;
+    p.style.transform = `translate(${offsetX}px,${offsetY}px)`;
+    p.style.opacity='0';
+  });
+  setTimeout(()=>p.remove(),600);
+});
+
+// Floating shape animation
+const shapes = document.querySelectorAll('.floating-shape');
+let angle=0;
+function animateShapes(){
+  angle+=0.002;
+  shapes.forEach((s,i)=>{
+    s.style.transform = `translate(${Math.sin(angle+i)*20}px, ${Math.cos(angle+i*1.3)*20}px)`;
+  });
+  requestAnimationFrame(animateShapes);
+}
+animateShapes();
+</script>
+</body>
+</html>
